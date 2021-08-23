@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userHomeController');
-const auth = require("../middleware/auth");
+const checkToken  = require("../middleware/auth");
 
 
-// Routes
+// Route
 router.get('/home', userController.view);
-router.post('/home',auth, userController.find);
+router.post('/home', userController.find);
 router.get('/adduser', userController.form);
-router.post('/adduser',auth, userController.create);
+router.post('/adduser', userController.create);
 router.get('/edituser/:id', userController.edit);
 router.post('/edituser/:id', userController.update);
 router.get('/viewuser/:id', userController.viewall);

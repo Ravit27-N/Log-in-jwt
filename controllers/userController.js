@@ -20,7 +20,7 @@ exports.homePage = async (req, res, next) => {
     // res.render('home1', {
     //     userInfo: row[0]
     // });
-    res.render('home1');
+    res.send('hello world');
    
 }
 
@@ -90,8 +90,8 @@ exports.register = async (req, res, next) => {
 
 // // Login Page
 exports.loginPage = (req, res, next) => {
-   res.render("login");
- };
+    res.render("login");
+};
 
 // Login User
 exports.login = async (req, res, next) => {
@@ -125,16 +125,10 @@ exports.login = async (req, res, next) => {
         const email = user[0].email;
             //create token (accessToken is create on top)
             // const token = jwt.sign({id:user[0].id,email:user[0].email},"hello")
-             const token = jwt.sign({id,email},"hello",{expiresIn: "2h"})
-            //save token 
-            user.token = token;
-            console.log("finish push");
-            console.log(token);            
-
-
-            
-
-            return res.redirect('/home');       
+             const token = await jwt.sign({id,email},"hello",{expiresIn: "2h"})
+            // user.token = token;
+                   
+            return res.redirect('/welcome');       
     }
     catch (e) {
         next(e);
