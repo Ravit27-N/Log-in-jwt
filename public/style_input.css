@@ -88,11 +88,7 @@ button {
 label {
     font-weight: bold;
 }
-.container-link {
-    width: 100%;
-    margin: auto;
-    text-align: center;
-}
+
 .link {
     
     margin-top: 10px;
@@ -101,7 +97,7 @@ label {
     padding: 5px 5px;
     font-size: 16px;
     display: inline-block;
-    border-radius: 5px;
+    border-radius: 15px;
 }
 
 .link a {
@@ -162,4 +158,9 @@ label {
     background-color: #dc3545;
     color: #ffffff;
 }
+
+
+
+
+
 

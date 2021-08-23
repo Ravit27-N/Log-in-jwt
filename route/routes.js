@@ -35,12 +35,12 @@ const {
 //     res.send("Token is completed")
 // })
 
-router.get("/welcome", homePage );
-router.post("/welcome", auth, (req, res) => {
-    const user = req.user;
-    console.log(user);
-    res.status(200).send("Welcome 🙌");
-  });
+// router.get("/welcome", homePage );
+// router.post("/welcome", auth, (req, res) => {
+//     const user = req.user;
+//     console.log(user);
+//     res.status(200).send("Welcome 🙌");
+//   });
 
 router.get("/login", loginPage);
 router.post("/login",

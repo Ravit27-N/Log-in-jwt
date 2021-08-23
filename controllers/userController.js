@@ -134,7 +134,7 @@ exports.login = async (req, res, next) => {
 
             
 
-            return res.redirect('/welcome');       
+            return res.redirect('/home');       
     }
     catch (e) {
         next(e);
