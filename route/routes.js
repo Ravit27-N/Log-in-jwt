@@ -37,7 +37,8 @@ const {
 
 router.get("/welcome", homePage );
 router.post("/welcome", auth, (req, res) => {
-    res.status(200).send("Welcome 🙌 ");
+    req.user
+    res.status(200).send("Welcome 🙌");
   });
 
 router.get("/login", loginPage);
