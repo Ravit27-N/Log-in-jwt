@@ -37,7 +37,8 @@ const {
 
 router.get("/welcome", homePage );
 router.post("/welcome", auth, (req, res) => {
-    req.user
+    const user = req.user;
+    console.log(user);
     res.status(200).send("Welcome 🙌");
   });
 
