@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken");
 const config = process.env;
-
+const store = require("store2")
 
 const verifyToken = (req, res, next) => {
-  const token =  req.body.token || req.query.token|| req.headers["x-access-token"] || req.header('Authorization') 
-  
+  // const token =  req.body.token || req.query.token|| req.headers["x-access-token"] || req.header('Authorization') 
+  const token = store.get('tokenkey');
   console.log(token);
 
   if (!token) {

@@ -16,11 +16,19 @@ app.set('view engine', 'hbs');
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
+
+ 
+///adddddd
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 
+
+
 app.use("/",routes);
 app.use("/",home);
+
+
+
 
 app.use((err, req, res, next) => {
     console.log(err);

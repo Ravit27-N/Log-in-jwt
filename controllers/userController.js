@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const dbConnection = require("../utils/dbConnection");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
+const store = require('store2');
 
 
 
@@ -98,7 +99,6 @@ exports.login = async (req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
 
     const errors = validationResult(req.body);
-    // const {email,password } = req.body;
     const {body} = req;
     if (!errors.isEmpty()) {
         return res.render('login', {
@@ -129,15 +129,9 @@ exports.login = async (req, res, next) => {
         const id =user[0].id;
         const email = user[0].email;
             
-            // const token = await jwt.sign({id,email},process.env.SECRETE)
-            const token = await encodeToken({id,email})
-            const ABC= {};
-            ABC.token = token;
-            console.log(ABC);
-
-            // res.status(200).header("token", token).send({ "token": token });
-            res.status(200).json(ABC);
-            // res.redirect('/welcome');       
+            const token = await jwt.sign({id,email},process.env.SECRETE)
+            store.set('tokenkey',token);
+            res.redirect('/welcome');       
     }
     catch (e) {
         next(e);

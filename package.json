@@ -22,6 +22,7 @@
     "express-validator": "^6.11.1",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.2.5",
-    "njwt": "^1.1.0"
+    "njwt": "^1.1.0",
+    "store2": "^2.12.0"
   }
 }
