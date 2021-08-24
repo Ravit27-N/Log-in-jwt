@@ -3,13 +3,9 @@ const bcrypt = require('bcryptjs');
 const dbConnection = require("../utils/dbConnection");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
-const { options } = require("../route/routes");
 
 
-function AccessToken(username){
-    return jwt.sign({username},"hello",{expiresIn: "2h"})
-}
-// Home Page
+
 exports.homePage = async (req, res, next) => {
     // select from user Token
     // console.log(req.user.id);
@@ -24,6 +20,7 @@ exports.homePage = async (req, res, next) => {
     res.send('hello world');
    
 }
+
 
 // Register Page
 exports.registerPage = (req, res, next) => {
@@ -96,10 +93,13 @@ exports.loginPage = (req, res, next) => {
 
 // Login User
 exports.login = async (req, res, next) => {
-  
-    const errors = validationResult(req);
-    const { body } = req;
+    res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
 
+    const errors = validationResult(req.body);
+    // const {email,password } = req.body;
+    const {body} = req;
     if (!errors.isEmpty()) {
         return res.render('login', {
             error: errors.array()[0].msg
@@ -107,32 +107,37 @@ exports.login = async (req, res, next) => {
     }
     try {
 
-        const [user] = await dbConnection.execute('SELECT * FROM `users` WHERE `email`=?', [body._email]);
-
+        const [user] = await dbConnection.query('SELECT * FROM users WHERE email=?', [body.email]);
+        console.log("find already");
         if (user.length != 1) {
+            console.log("error")
             return res.render('login', {
                 error: 'Invalid email address.'
+                
             });
         }
 
-        const checkPass = await bcrypt.compare(body._password, user[0].password);
+        const checkPass = await jwt.sign(body.password, user[0].password);
 
         if(checkPass === false){
             res.render('login', {
                 error: 'Invalid Password.'
           });
         }
+     
+          
         const id =user[0].id;
         const email = user[0].email;
-            //create token (accessToken is create on top)
-            // const token = jwt.sign({id:user[0].id,email:user[0].email},"hello")
             
-            const token = await jwt.sign({id,email},"hello",{expiresIn: "2h"})
-            
-            console.log(token)
-            res.redirect('/welcome');
-            // res.json({token});    
-            next();
+            // const token = await jwt.sign({id,email},process.env.SECRETE)
+            const token = await encodeToken({id,email})
+            const ABC= {};
+            ABC.token = token;
+            console.log(ABC);
+
+            // res.status(200).header("token", token).send({ "token": token });
+            res.status(200).json(ABC);
+            // res.redirect('/welcome');       
     }
     catch (e) {
         next(e);

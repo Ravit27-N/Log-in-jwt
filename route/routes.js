@@ -38,11 +38,18 @@ const ifLoggedin =(req,res,next) => {
 // })
 
 router.get("/welcome", auth , homePage );
-router.post("/welcome", auth, (req,res) => {
-    const user = req.user;
-    console.log(user);
-    res.status(200).send("Welcome 🙌");
-  });
+
+// router.get("/welcome", (req,res)=>{
+//     var token = req.body.token
+//     console.log("Form token is ",token);
+//     res.json(token) 
+// } );
+ 
+// router.post("/welcome", auth, (req,res) => {
+//     const user = req.user;
+//     console.log(user);
+//     res.status(200).send("Welcome 🙌");
+//   });
 
 const chceklogin = (req,res)=>{
     if(req.user){
@@ -67,18 +74,19 @@ const chceklogin = (req,res)=>{
 router.get("/login",loginPage);
 router.post("/login",
     [
-        body("_email", "Invalid email address")
+        body("email", "Invalid email address")
             .notEmpty()
             .escape()
             .trim()
             .isEmail(),
-        body("_password", "The Password must be of minimum 4 characters length")
+        body("password", "The Password must be of minimum 4 characters length")
             .notEmpty()
             .trim()
             .isLength({ min: 4 }),
-    ],
-    login
+    ]
+     ,login
 );
+// login
 
 router.get("/signup",registerPage);
 router.post(
