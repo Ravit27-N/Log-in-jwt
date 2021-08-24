@@ -37,21 +37,21 @@ const ifLoggedin =(req,res,next) => {
 //     res.send("Token is completed")
 // })
 
-router.get("/welcome",auth, homePage );
+router.get("/welcome", auth , homePage );
 router.post("/welcome", auth, (req,res) => {
     const user = req.user;
     console.log(user);
     res.status(200).send("Welcome 🙌");
   });
 
-// const chceklogin = (req,res)=>{
-//     if(req.user){
-//         return res.redirect('/home');
-//     }
-//     else{
-//         return res.redirect('/login');
-//     }
-// }
+const chceklogin = (req,res)=>{
+    if(req.user){
+        return res.redirect('/home');
+    }
+    else{
+        return res.redirect('/login');
+    }
+}
 
 // router.post("/", auth ,(req,res)=>{
 //     // can req token 

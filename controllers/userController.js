@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const dbConnection = require("../utils/dbConnection");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
+const { options } = require("../route/routes");
 
 
 function AccessToken(username){
@@ -125,10 +126,13 @@ exports.login = async (req, res, next) => {
         const email = user[0].email;
             //create token (accessToken is create on top)
             // const token = jwt.sign({id:user[0].id,email:user[0].email},"hello")
-             const token = await jwt.sign({id,email},"hello",{expiresIn: "2h"})
-            // user.token = token;
-                   
-            return res.redirect('/welcome');       
+            
+            const token = await jwt.sign({id,email},"hello",{expiresIn: "2h"})
+            
+            console.log(token)
+            res.redirect('/welcome');
+            // res.json({token});    
+            next();
     }
     catch (e) {
         next(e);
