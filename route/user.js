@@ -1,17 +1,28 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userHomeController');
-const checkToken  = require("../middleware/auth");
+const checkAuth  = require("../middleware/auth");
+// const app = express();
+// const form= require("./routes");
+// app.use(form);
 
+
+// const ifnotlogedin=(req,res,next)=>{
+//   if(checkAuth){
+//     next()
+//   }else{
+//     res.redirect("/login");
+//   }
+// }
 
 // Route
-router.get('/home', userController.view);
-router.post('/home', userController.find);
-router.get('/adduser', userController.form);
-router.post('/adduser', userController.create);
-router.get('/edituser/:id', userController.edit);
-router.post('/edituser/:id', userController.update);
-router.get('/viewuser/:id', userController.viewall);
-router.get('/:id',userController.delete);
+router.get('/',checkAuth, userController.view);
+router.post('/',checkAuth , userController.find);
+router.get('/adduser',checkAuth , userController.form);
+router.post('/adduser',checkAuth , userController.create);
+router.get('/edituser/:id',checkAuth , userController.edit);
+router.post('/edituser/:id',checkAuth , userController.update);
+router.get('/viewuser/:id',checkAuth , userController.viewall);
+router.get('/:id',checkAuth ,userController.delete);
   
 module.exports = router;

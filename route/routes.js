@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { body, check } = require("express-validator");
-const auth = require("../middleware/auth");
-
+const checkAuth = require("../middleware/auth");
+const store = require("store2");
 
 const {
     homePage,
@@ -15,61 +15,9 @@ const {
 } = require("../controllers/userController");
 
 
-// const ifNotLoggedin = (req, res, next) => {
-//     if(!req.user.id){
-//         return res.redirect('/login');
-//     }
-//     next();
-// }
+//for testing
+router.get("/welcome", checkAuth, homePage );
 
-const ifLoggedin =(req,res,next) => {
-
-        if(req.user){
-            return res.redirect('/welcome');
-        }
-   
-    next();
-}
-
-
-// router.get('/', verifyToken , homePage);
-// router.get('/', auth ,(req,res)=>{
-//     res.send("Token is completed")
-// })
-
-router.get("/welcome", auth , homePage );
-
-// router.get("/welcome", (req,res)=>{
-//     var token = req.body.token
-//     console.log("Form token is ",token);
-//     res.json(token) 
-// } );
- 
-// router.post("/welcome", auth, (req,res) => {
-//     const user = req.user;
-//     console.log(user);
-//     res.status(200).send("Welcome 🙌");
-//   });
-
-const chceklogin = (req,res)=>{
-    if(req.user){
-        return res.redirect('/home');
-    }
-    else{
-        return res.redirect('/login');
-    }
-}
-
-// router.post("/", auth ,(req,res)=>{
-//     // can req token 
-//     if(req.user){
-//         return res.redirect('/home');
-//     }
-//     //can not go to login
-//     else{
-//         return res.redirect('/login');
-//     }
-// });
 
 router.get("/login",loginPage);
 router.post("/login",
@@ -115,12 +63,10 @@ router.post(
 );
 
 router.get('/logout', (req, res, next) => {
+    store.clear();
     res.redirect('/login');
 });
-////delete token 
-// router.get('/logout', function(req, res) {
-//     res.status(200).send({ auth: false, token: null });
-//   });
+
 
 router.get("/changepass", changepasswordPage);
 router.post("/changepass",
@@ -148,17 +94,7 @@ router.post("/changepass",
 );
 
 
-// const userController = require('../controllers/userHomeController');
-// // const checkToken  = require("../middleware/auth");
-// //Route
-// router.get('/home',auth, userController.view);
-// router.post('/home', userController.find);
-// router.get('/adduser', userController.form);
-// router.post('/adduser', userController.create);
-// router.get('/edituser/:id', userController.edit);
-// router.post('/edituser/:id', userController.update);
-// router.get('/viewuser/:id', userController.viewall);
-// router.get('/:id',userController.delete);
+
   
 
 module.exports = router;

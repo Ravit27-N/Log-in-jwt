@@ -94,12 +94,10 @@ exports.loginPage = (req, res, next) => {
 
 // Login User
 exports.login = async (req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
+    
+    const errors = validationResult(req);
+    const { body } = req;
 
-    const errors = validationResult(req.body);
-    const {body} = req;
     if (!errors.isEmpty()) {
         return res.render('login', {
             error: errors.array()[0].msg
@@ -107,23 +105,22 @@ exports.login = async (req, res, next) => {
     }
     try {
 
-        const [user] = await dbConnection.query('SELECT * FROM users WHERE email=?', [body.email]);
-        console.log("find already");
+        const [user] = await dbConnection.execute('SELECT * FROM `users` WHERE `email`=?', [body.email]);
+   
         if (user.length != 1) {
-            console.log("error")
             return res.render('login', {
                 error: 'Invalid email address.'
-                
             });
         }
 
-        const checkPass = await jwt.sign(body.password, user[0].password);
-
+        const checkPass = await bcrypt.compare(body.password, user[0].password);
+       
         if(checkPass === false){
             res.render('login', {
                 error: 'Invalid Password.'
           });
         }
+        
      
           
         const id =user[0].id;
@@ -131,7 +128,7 @@ exports.login = async (req, res, next) => {
             
             const token = await jwt.sign({id,email},process.env.SECRETE)
             store.set('tokenkey',token);
-            res.redirect('/welcome');       
+            res.redirect('/');       
     }
     catch (e) {
         next(e);

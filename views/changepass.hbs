@@ -21,10 +21,13 @@
       <label for="user_pass">confirm password</label>
       <input type="password" class="input" name="_confirm_password" id="user_confirm_pass" placeholder="Enter confirm password">
 
-      <% if(typeof msg != 'undefined'){ %>
-      <div class="success-msg"><%= msg %></div><% }
-      if(typeof error !== 'undefined'){ %>
-      <div class="err-msg"><%= error %></div><% } %>
+      {{#if msg}}
+             <div class="success-msg">{{msg}}</div>
+        {{else}}
+             <div class="err-msg">{{error}}</div>
+        {{/if}}
+
+
       <input type="submit" value="Change Password">
 
       <div class="link"><a href="./login">Login</a></div>

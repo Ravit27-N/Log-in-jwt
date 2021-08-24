@@ -20,7 +20,7 @@ exports.view = (req, res) => {
     } else {
       console.log(err);
     }
-    console.log('The data from user table: \n', rows);
+    // console.log('The data from user table: \n', rows);
   });
 }
 
@@ -34,7 +34,7 @@ exports.find = (req, res) => {
     } else {
       console.log(err);
     }
-    console.log('The data from user table: \n', rows);
+    // console.log('The data from user table: \n', rows);
   });
 }
 
@@ -54,7 +54,7 @@ exports.create = (req, res) => {
     } else {
       console.log(err);
     }
-    console.log('The data from user table: \n', rows);
+    // console.log('The data from user table: \n', rows);
   });
 }
 
@@ -68,7 +68,7 @@ exports.edit = (req, res) => {
     } else {
       console.log(err);
     }
-    console.log('The data from user table: \n', rows);
+    // console.log('The data from user table: \n', rows);
   });
 }
 
@@ -89,12 +89,12 @@ exports.update = (req, res) => {
         } else {
           console.log(err);
         }
-        console.log('The data from user table: \n', rows);
+        // console.log('The data from user table: \n', rows);
       });
     } else {
       console.log(err);
     }
-    console.log('The data from user table: \n', rows);
+    // console.log('The data from user table: \n', rows);
   });
 }
 
@@ -124,7 +124,7 @@ exports.delete = (req, res) => {
     } else {
       console.log(err);
     }
-    console.log('The data from beer table are: \n', rows);
+    // console.log('The data from beer table are: \n', rows);
   });
 
 }
@@ -139,7 +139,7 @@ exports.viewall = (req, res) => {
     } else {
       console.log(err);
     }
-    console.log('The data from user table: \n', rows);
+    // console.log('The data from user table: \n', rows);
   });
 
 }
