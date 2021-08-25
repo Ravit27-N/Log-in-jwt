@@ -126,8 +126,9 @@ exports.login = async (req, res, next) => {
         const id =user[0].id;
         const email = user[0].email;
             
-            const token = await jwt.sign({id,email},process.env.SECRETE)
-            store.set('tokenkey',token);
+            const token = await jwt.sign({id,email},process.env.SECRETE,
+                { expiresIn: '30s' })
+            store.set(process.env.SECRETE,token);
             res.redirect('/');       
     }
     catch (e) {
