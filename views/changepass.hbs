@@ -1,17 +1,8 @@
-<head>
-    {{!-- add --}}
-    <meta http-equiv="Content-Type" content="text/html charset=utf-8"/>
-    {{!-- add --}}
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>{{#if title}}{{title}} {{else}} 'underfind'{{/if}} </title>
+
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style_input.css">
     
-</head>
 
 <div class="container">
   <div class="logo">
@@ -21,16 +12,16 @@
 
   <form action="/changepass" method="POST">
       <label for="user_email">Email</label>
-      <input type="email" class="input" name="email" autocomplete="off" id="user_email" placeholder="Enter your email">
+      <input type="email" class="input" name="_email" autocomplete="off" id="user_email" placeholder="Enter your email">
 
       <label for="user_pass">Password</label>
-      <input type="password" class="input" name="password" id="user_pass" placeholder="Enter old password">
+      <input type="password" class="input" name="_password" id="user_pass" placeholder="Enter old password">
 
       <label for="user_pass">New password</label>
-      <input type="password" class="input" name="new_password" id="user_new_pass" placeholder="Enter new password">
+      <input type="password" class="input" name="_new_password" id="user_new_pass" placeholder="Enter new password">
 
       <label for="user_pass">confirm password</label>
-      <input type="password" class="input" name="confirm_password" id="user_confirm_pass" placeholder="Enter confirm password">
+      <input type="password" class="input" name="_confirm_password" id="user_confirm_pass" placeholder="Enter confirm password">
 
       {{#if msg}}
              <div class="success-msg">{{msg}}</div>
@@ -46,4 +37,3 @@
       
   </form>
 </div>
-

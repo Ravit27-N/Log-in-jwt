@@ -1,19 +1,22 @@
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
 const config = process.env;
 const store = require("store2")
 
 const verifyToken = (req, res, next) => {
-  const token = store.get(config.STORE_SECRETE);
+  
+  const token = store.get(process.env.SECRETE);
   // console.log(token);
+    
   try {
-    const decoded = jwt.verify(token, config.SECRETE);
+    const decoded = jwt.verify(token, process.env.SECRETE);
     req.user = decoded;
   } catch (err) {
     // return res.status(401).send("Invalid Token");
-    res.redirect("/login");
+    return res.redirect("/login");
   }
- 
+  return next();
+
+  
 };
 
 module.exports = verifyToken
