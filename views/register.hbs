@@ -1,50 +1,52 @@
-<%- include('header',{
-    title:'Signup'
-}); -%>
 
-<!DOCTYPE html>
-<html lang="en">
 <head>
+    {{!-- add --}}
+    <meta http-equiv="Content-Type" content="text/html charset=utf-8"/>
+    {{!-- add --}}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
     
-</body>
-</html>
+    <title>{{#if title}}{{title}} {{else}} 'underfind'{{/if}} </title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style_input.css">
+    
+</head>
 
-<div class="container">
-    <div class="logo">
-        <img src="logo.png">
-      </div>
-    <h1>Sign Up</h1>
-    <form action="" method="POST">
+    <div  class="container">
+        <div class="logo">
+            <img src="logo.png">
+        </div>
+        <h1>Sign Up</h1>
+        
+        <form action="/signup" method="POST">
 
-        <label for="user_name">Name</label>
-        <input type="text" class="input" name="_name" autocomplete="off" id="user_name" placeholder="Enter your name">
+            <label for="user_name">Name</label>
+            <input type="text" class="input" name="name" autocomplete="off" id="user_name" placeholder="Enter your name">
 
-        <label for="user_email">Email</label>
-        <input type="email" class="input" name="_email" autocomplete="off" id="user_email" placeholder="Enter your email">
+            <label for="user_email">Email</label>
+            <input type="email" class="input" name="email" autocomplete="off" id="user_email" placeholder="Enter your email">
 
-        <label for="user_pass">Password</label>
-        <input type="password" class="input" name="_password" id="user_pass" placeholder="Enter new password">
+            <label for="user_pass">Password</label>
+            <input type="password" class="input" name="password" id="user_pass" placeholder="Enter new password">
 
-        <label for="user_pass">Confirm Password</label>
-        <input type="password" class="input" name="_confirm_password" id="user_confirm_pass" placeholder="Enter confirm new password">
+            <label for="user_pass">Confirm Password</label>
+            <input type="password" class="input" name="confirm_password" id="user_confirm_pass" placeholder="Enter confirm new password">
 
-       
-        {{#if msg}}
-             <div class="success-msg">{{msg}}</div>
-        {{else}}
-             <div class="err-msg">{{error}}</div>
-        {{/if}}
+        
+            {{#if msg}}
+                <div class="success-msg">{{msg}}</div>
+            {{/if}}
+            {{#if error}}
+                <div class="err-msg">{{error}}</div>
+            {{/if}}
+            <input type="submit" value="Sign Up">
 
-        <input type="submit" value="Sign Up">
-        <div class="link"><a href="./login">Login</a></div>
-        <div class="link"><a href="./changepass">Change password</a></div>
-    </form>
-</div>
+            <div class="link"><a href="./login">Login</a></div>
+            <div class="link"><a href="./changepass">Change password</a></div>
+        </form>
+    </div>
 
-<%- include('footer'); -%>
+
+
